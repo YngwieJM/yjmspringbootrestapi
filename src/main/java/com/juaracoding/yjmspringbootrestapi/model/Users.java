@@ -21,6 +21,10 @@ public class Users {
     @Column(name = "role", nullable = false, length = 20)
     private String role;
 
+    @ManyToOne
+    @JoinColumn(name = "id_akses", foreignKey = @ForeignKey(name = "fk_users_to_akses"))
+    private Akses akses;
+
     public Long getId() {
         return id;
     }
