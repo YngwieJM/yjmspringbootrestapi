@@ -6,30 +6,24 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "akses")
-public class Akses {
+@Table(name = "menu")
+public class Menu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "Nama", nullable = false,unique = true, length = 50)
     private String nama;
 
+    @Column(name = "Path", nullable = false,unique = true, length = 50)
+    private String path;
+
     @Column(name = "Deskripsi", nullable = false, length = 255,unique = true)
     private String deskripsi;
-
-    @ManyToMany
-    @JoinTable(name = "MapAksesMenu", uniqueConstraints =@UniqueConstraint(name = "unq-akses-to-menu",columnNames = {"IDAkses","IDMenu"}),
-            joinColumns = @JoinColumn(name = "IDAkses",foreignKey = @ForeignKey(name = "fk-toAkses")),
-            inverseJoinColumns = @JoinColumn(name = "IDMenu",foreignKey = @ForeignKey(name = "fk-toMenu"))
-    )
-    private List<Menu> listMenu;
-
 
     public Long getId() {
         return id;
@@ -47,20 +41,20 @@ public class Akses {
         this.nama = nama;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public String getDeskripsi() {
         return deskripsi;
     }
 
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
-    }
-
-    public List<Menu> getListMenu() {
-        return listMenu;
-    }
-
-    public void setListMenu(List<Menu> listMenu) {
-        this.listMenu = listMenu;
     }
 
 }
